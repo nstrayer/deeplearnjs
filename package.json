@@ -22,11 +22,15 @@
   "author": "Nick Strayer <nick.strayer@gmail.com> (http://nickstrayer.me)",
   "license": "MIT",
   "dependencies": {
+    "d3": "4.11.0",
+    "d3-jetpack": "2.0.13",
     "lodash": "4.17.4",
+    "redux": "3.7.2",
     "statdists": "0.0.11"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
+    "babel-eslint": "8.0.1",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.2",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
