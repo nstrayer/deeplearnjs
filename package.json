@@ -21,6 +21,7 @@
   "author": "Nick Strayer <nick.strayer@gmail.com> (http://nickstrayer.me)",
   "license": "MIT",
   "dependencies": {
+    "lodash": "4.17.4",
     "statdists": "0.0.11"
   },
   "devDependencies": {
