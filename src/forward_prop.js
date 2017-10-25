@@ -1,12 +1,13 @@
 import calc_activation from './calc_activation';
 import activation_func from './activation_functions/activation_func';
 
-// takes a set of data inputs and a given network
-// and forward propigates through network,
-// returns a network of same size/shape as original
-// but with activation info filled out.
-function forward_prop(data_input, network) {
-  //     console.log('forward propigation')
+/**
+ * takes a set of data inputs and a given network and forward propigates through network,
+ * @param {object[]} network - network constructed using library functions.
+ * @param {number[]} data_input - vector of input data for single observation.
+ * @return {object[]} - returns a network of same size/shape as original but with activation info filled out.
+ */
+function forward_prop(network, data_input) {
   // these are the actual data entering the model
   let inputs = data_input;
 
@@ -21,7 +22,7 @@ function forward_prop(data_input, network) {
       const activation = calc_activation(neuron.weights, inputs);
 
       // squash with non-linear activation function
-      const output = activation_func(activation, neuron.act_func);
+      const output = activation_func(neuron.act_func, activation);
 
       // update the inputs for next layer with current layer's output
       layer_output.push(output);

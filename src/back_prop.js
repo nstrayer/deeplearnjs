@@ -1,10 +1,12 @@
 import activation_func_deriv from './activation_functions/activation_func_deriv';
 
-// takes the true result of the data that the network was activated on
-// and runs back_propigation to find gradients for each neuron
-function back_prop(expected, network) {
-  //     console.log('backward propigation')
-
+/**
+ * Takes the true result of the data that the network was activated on and runs back_propigation to find gradients for each neuron
+ * @param {object[]} network - network constructed using library functions. 
+ * @param {number[]} expected - vector of true outputs corresponding to the input the network was activated with.
+ * @return {object[]} - returns a network of same size/shape as original but with gradient info filled out.
+ */
+function back_prop(network, expected) {
   // iterate backwards through layers...
   // unpacks array before reversing as to not mutate original
   return [...network].reverse().reduce((new_network, layer, i) => {
@@ -29,7 +31,7 @@ function back_prop(expected, network) {
 
       // send error backwards through deriv of activation function
       const delta =
-        error * activation_func_deriv(neuron.output, neuron.act_func);
+        error * activation_func_deriv(neuron.act_func, neuron.output);
 
       // return neuron so we build up a layer in map.
       return Object.assign({}, neuron, {error, delta});
