@@ -26,6 +26,7 @@
     "d3-jetpack": "2.0.13",
     "lodash": "4.17.4",
     "redux": "3.7.2",
+    "slid3r": "0.0.9",
     "statdists": "0.0.11"
   },
   "devDependencies": {

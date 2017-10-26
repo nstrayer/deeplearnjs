@@ -1,11 +1,33 @@
 const d3 = Object.assign({}, require('d3'), require('d3-jetpack'));
 import {rnorm, runif, emptyArr} from 'statdists';
-import slid3r from './slid3r/main';
+// import slid3r from './slid3r/main';
+import slid3r from 'slid3r';
 
 import configureStore from './redux_store/configure_store';
+import {
+  changeNumberEpochs,
+  changeLearningRate,
+} from './redux_store/actions/index';
 
 // REDUX INITIALIZATION
 const appStore = configureStore();
+
+function newLearningRate(newRate) {
+  console.log('setting a new learning rate');
+  appStore.dispatch(changeLearningRate(newRate));
+}
+
+function newEpochNumber(newNumber) {
+  console.log('setting a new number of epochs rate');
+  appStore.dispatch(changeNumberEpochs(newNumber));
+}
+
+function onNewSettings() {
+  const newState = appStore.getState();
+  console.log('new state!', newState);
+}
+
+appStore.subscribe(onNewSettings);
 
 import initialize_network from './initialize_network/initialize_network';
 import train_network from './train_network';
@@ -39,9 +61,7 @@ c.svg.selectAppend('g.numberEpochs').call(
     // .loc([sliderStarts, c.height - 4 * sliderGap])
     // .numTicks(0)
     .label('Number of training epochs')
-    .onDone((newEpochs) => {
-      console.log(newEpochs);
-    })
+    .onDone(newEpochNumber)
 );
 
 c.svg.selectAppend('g.learningRate').call(
@@ -53,9 +73,19 @@ c.svg.selectAppend('g.learningRate').call(
     .loc([0, 1 * sliderGap])
     // .numTicks(0)
     .label('Learning rate')
-    .onDone((newRate) => {
-      console.log(newRate);
-    })
+    .onDone(newLearningRate)
+);
+
+c.svg.selectAppend('g.normSwitch').call(
+  slid3r()
+    .width(30)
+    .range([0, 1])
+    .startPos(1)
+    .loc([0, 2 * sliderGap])
+    .numTicks(2)
+    .customTicks(['off', 'on'])
+    .label('Turn On Normalization')
+    .onDone(() => console.log('norm on'))
 );
 const n = 50;
 const myData = runif(n).map((d) => {

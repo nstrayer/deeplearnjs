@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 const learningRate = (state = 0.5, action) => {
   switch (action.type) {
     case 'CHANGE_LEARN_RATE':
-      return {...state, rate: action.rate};
+      return action.rate;
     default:
       return state;
   }
@@ -12,7 +12,7 @@ const learningRate = (state = 0.5, action) => {
 const numberEpochs = (state = 10, action) => {
   switch (action.type) {
     case 'CHANGE_NUMBER_EPOCHS':
-      return {...state, n_epochs: action.number};
+      return action.number;
     default:
       return state;
   }
